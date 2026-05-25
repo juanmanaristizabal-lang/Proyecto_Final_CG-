@@ -1,0 +1,136 @@
+
+{
+  "config": {
+    "crystalsNeededInCave": 5,
+    "caveTimeLimit": 80,
+    "shipPartsNeeded": 3,
+    "playerHealth": 100,
+    "bossHealth": 150
+  },
+
+  "missions": [
+    {
+      "id": "encontrar_llave",
+      "title": "Busca la Llave",
+      "description": "Explora la isla y encuentra la llave que abre la Cueva Cristalina.",
+      "scene": "ISLA",
+      "completed": false
+    },
+    {
+      "id": "sobrevivir_cueva",
+      "title": "Escapa de la Cueva",
+      "description": "Recoge los cristales y escapa antes de que la cueva colapse.",
+      "scene": "CUEVA",
+      "completed": false
+    },
+    {
+      "id": "reparar_nave",
+      "title": "Recoge las Piezas",
+      "description": "Encuentra las piezas de la nave en el Laboratorio.",
+      "scene": "Laboratorio",
+      "completed": false
+    },
+    {
+      "id": "reconstruir_nave",
+      "title": "Reconstruye la Nave",
+      "description": "Usa las piezas recolectadas para reconstruir tu nave y escapar.",
+      "scene": "ISLA",
+      "completed": false
+    }
+  ],
+
+  "dialogues": [
+    {
+      "id": "intro_isla",
+      "scene": "ISLA",
+      "lines": [
+        "¿Dónde estoy...?",
+        "Mi nave cayó en esta isla. Debo encontrar la forma de escapar.",
+        "Escucho algo... parece venir de las cuevas al norte."
+      ]
+    },
+    {
+      "id": "cerca_cueva",
+      "scene": "ISLA",
+      "lines": [
+        "Esta debe ser la entrada a la cueva...",
+        "Necesito una llave para abrirla."
+      ]
+    },
+    {
+      "id": "intro_cueva",
+      "scene": "CUEVA",
+      "lines": [
+        "Esta cueva está llena de cristales de energía.",
+        "¡Tengo que recogerlos rápido! Las paredes están temblando..."
+      ]
+    },
+    {
+      "id": "intro_laboratorio",
+      "scene": "Laboratorio",
+      "lines": [
+        "Un laboratorio abandonado...",
+        "Aquí deben estar las piezas de mi nave."
+      ]
+    }
+  ],
+
+  "enemies": [],
+
+  "items": [
+    {
+      "id": "llave_isla",
+      "type": "key",
+      "scene": "ISLA"
+    },
+
+    {
+      "id": "cristal_01",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+    {
+      "id": "cristal_02",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+    {
+      "id": "cristal_03",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+    {
+      "id": "cristal_04",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+    {
+      "id": "cristal_05",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+
+    {
+      "id": "pieza_motor",
+      "type": "ship_part",
+      "scene": "Laboratorio",
+      "partName": "Motor de Propulsión",
+      "description": "El motor principal de la nave."
+    },
+    {
+      "id": "pieza_panel",
+      "type": "ship_part",
+      "scene": "Laboratorio",
+      "partName": "Panel de Control",
+      "description": "El sistema de navegación."
+    },
+    {
+      "id": "pieza_nucleo",
+      "type": "ship_part",
+      "scene": "Laboratorio",
+      "partName": "Núcleo de Energía",
+      "description": "La fuente de poder de la nave."
+    }
+  ]
+}
+
