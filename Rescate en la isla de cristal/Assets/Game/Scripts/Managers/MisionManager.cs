@@ -24,6 +24,8 @@ public class MisionManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+          
+            
             DontDestroyOnLoad(gameObject);
         }
         else

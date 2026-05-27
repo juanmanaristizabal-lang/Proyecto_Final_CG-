@@ -1,6 +1,9 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -45,6 +48,77 @@ public class UIManager : MonoBehaviour
             messagePanel.SetActive(false);
     }
 
+    private void Start()
+    {
+        StartCoroutine(CargarMisionDelJSON());
+    }
+
+    private IEnumerator CargarMisionDelJSON()
+    {
+        yield return null;
+
+        if (JsonManager.Instance?.Data == null) yield break;
+
+        string escena = SceneManager.GetActiveScene().name;
+        var misiones = JsonManager.Instance.Data.missions;
+
+        MissionData misionAMostrar = null;
+
+        if (escena == "ISLA")
+        {
+            int parts = GameDataStructure.Instance.PlanePartsDataBase.Count;
+            int needed = GameManager.Instance.PlanePartsNeeded;
+
+            // Si ya tiene las piezas → mostrar misión de reconstruir
+            if (parts >= needed)
+            {
+                foreach (var m in misiones)
+                {
+                    if (m.id == "reconstruir_nave")
+                    {
+                        misionAMostrar = m;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // Si no tiene piezas → mostrar misión de buscar llave
+                foreach (var m in misiones)
+                {
+                    if (m.id == "encontrar_llave")
+                    {
+                        misionAMostrar = m;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Para CUEVA y Laboratorio busca normalmente
+            foreach (var m in misiones)
+            {
+                if (m.scene.Trim() == escena.Trim())
+                {
+                    misionAMostrar = m;
+                    break;
+                }
+            }
+        }
+
+        // Mostrar la misión encontrada
+        if (misionAMostrar != null)
+        {
+            UpdateMissionText(misionAMostrar.title, misionAMostrar.description);
+            ShowMessage(misionAMostrar.description, 4f);
+            Debug.Log($"[UIManager] ✅ Misión: {misionAMostrar.title}");
+        }
+        else
+        {
+            Debug.Log($"[UIManager] Sin misión para: {escena}");
+        }
+    }
     private void Update()
     {
         if (messagePanel != null && messagePanel.activeSelf)
@@ -103,5 +177,7 @@ public class UIManager : MonoBehaviour
             planePartsText.text = $"Piezas: {current} / {needed}";
         }
     }
+
+   
 
 }

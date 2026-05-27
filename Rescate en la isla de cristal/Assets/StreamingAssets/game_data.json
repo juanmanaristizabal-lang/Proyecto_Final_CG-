@@ -2,7 +2,7 @@
 {
   "config": {
     "crystalsNeededInCave": 5,
-    "caveTimeLimit": 80,
+    "caveTimeLimit": 60,
     "shipPartsNeeded": 3,
     "playerHealth": 100,
     "bossHealth": 150

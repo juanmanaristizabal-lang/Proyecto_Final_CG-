@@ -28,12 +28,13 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    private void Muerte()
+    private void Die()
     {
+        if (seMurio) return;
         seMurio = true;
-        GameDataStructure.Instance.LogEvent("El jugador ha muerto, reinicando escena");
-        UIManager.Instance?.ShowMessage("Has muerto, reiniciando escena en...", 2f);
-        Invoke(nameof(RestartScene), 2f);
+
+        // Busca el LabController en la escena — igual que cueva usa CaveTimerController
+        FindFirstObjectByType<LabController>()?.JugadorMurio();
     }
 
 
@@ -59,14 +60,11 @@ public class PlayerHealth : MonoBehaviour
         UIManager.Instance.ShowMessage($"!DAÑO! VIDA : -{amount} | Vida: {saludActual}/{maximaSalud}", 1f);
         if(saludActual <= 0)
         {
-            Muerte();
+            Die();
         }
 
     }
 
-    private void RestartScene()
-    {
-        SceneManager.LoadScene("Laboratorio");
-    }
+   
 
 }

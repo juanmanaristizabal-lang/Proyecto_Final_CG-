@@ -21,24 +21,26 @@ public class CaveTimerController : MonoBehaviour
     private void Start()
     {
         GameDataStructure.Instance.collectedCrystals.Clear();
-
         int needed = GameManager.Instance.crystalsNeededInCave;
         UIManager.Instance.UpdateCrystalCount(0, needed);
 
-
-
         if (JsonManager.Instance.Data.config != null)
-        {
             TiempoRestante = JsonManager.Instance.Data.config.caveTimeLimit;
-        }
         else
-        {
-            TiempoRestante = 60f; // Valor por defecto
-
-        }
+            TiempoRestante = 60f;
 
         tiempoCorriendo = true;
+        jugadorAfuera = false;
+
+        // Activar el texto del timer explícitamente ← agrega esto
+        if (timerText != null)
+            timerText.gameObject.SetActive(true);
+
+        UpdateTimerUI();
         Debug.Log($"[CaveTimer] Tiempo límite: {TiempoRestante}s");
+
+      
+
     }
 
     private void Update()
@@ -58,7 +60,7 @@ public class CaveTimerController : MonoBehaviour
         int minutos = Mathf.FloorToInt(t / 60f);
         int seconds = Mathf.FloorToInt(t % 60f);
 
-        timerText.text = $"{minutos:00}{seconds:00}";
+        timerText.text = $"{minutos:00}:{seconds:00}";
         timerText.color = TiempoRestante <= warningThreshold ? warningColor : normalColor;
     }
 
@@ -84,5 +86,7 @@ public class CaveTimerController : MonoBehaviour
         tiempoCorriendo = false;
         jugadorAfuera = true;
     }
+
+   
 
 }
