@@ -24,7 +24,6 @@ public class MissionData
     public string scene;
     public bool completed;
 
-    public bool Completed { get; internal set; }
 }
 
 [Serializable]

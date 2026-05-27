@@ -21,13 +21,28 @@ public class UIManager : MonoBehaviour
     [Header("Contador de cristales (activo en Cueva)")]
     public TextMeshProUGUI crystalCountText;
 
+    [Header("Contador piezas nave")]
+    public TextMeshProUGUI planePartsText;
+
+    [Header("Contador piezas nave")]
     private float messageTimer;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         HideInteractionText();
-        if (messagePanel) messagePanel.SetActive(false);
+
+        if (messagePanel)
+            messagePanel.SetActive(false);
     }
 
     private void Update()
@@ -52,10 +67,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-     public void UpdateMissionText(string title, string description)
+    public void UpdateMissionText(string title, string description)
     {
         if (missionTitleText != null) missionTitleText.text = title;
-        if (missionDescText  != null) missionDescText.text  = description;
+        if (missionDescText != null) missionDescText.text = description;
     }
 
 
@@ -69,7 +84,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMessage(string text, float duration = 3f)
     {
-        if (messagePanel == null) return; 
+        if (messagePanel == null) return;
         messageText.text = text;
         messagePanel.SetActive(true);
         messageTimer = duration;
@@ -79,6 +94,14 @@ public class UIManager : MonoBehaviour
     {
         if (crystalCountText != null)
             crystalCountText.text = $"Cristales: {current} / {needed}";
+    }
+
+    public void UpdatePlaneParts(int current, int needed)
+    {
+        if (planePartsText != null)
+        {
+            planePartsText.text = $"Piezas: {current} / {needed}";
+        }
     }
 
 }
