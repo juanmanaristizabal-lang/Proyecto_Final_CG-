@@ -69,9 +69,12 @@ public class GameManager : MonoBehaviour
 
     public void GoToLaboratorio()
     {
+        GameDataStructure.Instance.PlanePartsDataBase.Clear();
+        GameDataStructure.Instance.repairQueue.Clear();
+
         GameDataStructure.Instance.LogEvent("Entrando al Laboratorio");
         SaveGame();
-        SceneManager.LoadScene(SCENE_LABORATORIO);
+        SceneManager.LoadScene("Laboratorio");
     }
 
     public void GoToIsla()

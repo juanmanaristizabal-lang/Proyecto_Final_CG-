@@ -39,6 +39,8 @@ public class MisionManager : MonoBehaviour
         neededShipParts = GameManager.Instance.PlanePartsNeeded;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        MisionManager.Instance.OnUIReady();
     }
 
     private void OnDestroy()
@@ -139,4 +141,37 @@ public class MisionManager : MonoBehaviour
             );
         }
     }
+
+    public void OnUIReady()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        
+        var missions = JsonManager.Instance?.Data?.missions;
+        if (missions == null)
+        {
+            Debug.LogWarning("[MisionManager] No hay misiones en el JSON.");
+            return;
+        }
+
+        foreach (var mission in missions)
+        {
+            if (mission.scene == currentScene && !mission.completed)
+            {
+                
+                UIManager.Instance?.UpdateMissionText(
+                    mission.title,
+                    mission.description);
+
+                
+                UIManager.Instance?.ShowMessage(
+                    mission.description, 4f);
+
+                Debug.Log($"[MisionManager] Misión leída del JSON: {mission.title}");
+                return;
+            }
+        }
+    }
+
+
 }

@@ -53,7 +53,7 @@ public class CaveExitTrigger : MonoBehaviour
 
         if (current >= needed)
         {
-            // Detiene el timer para que no reinicie mientras carga
+            
             FindFirstObjectByType<CaveTimerController>()?.StopTimer();
 
             UIManager.Instance.HideInteractionText();
