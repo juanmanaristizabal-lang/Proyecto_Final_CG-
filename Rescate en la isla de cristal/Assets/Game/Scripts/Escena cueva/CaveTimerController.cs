@@ -1,54 +1,42 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class CaveTimerController : MonoBehaviour
 {
     [Header("UI del timer")]
     public TextMeshProUGUI timerText;
 
-    [Header("Color de advertencia")]
+    [Header("Color de advertencia (cuando queda poco tiempo)")]
     public Color normalColor = Color.white;
     public Color warningColor = Color.red;
-    public float warningThreshold = 15f;
+    public float warningThreshold = 15f;   
 
-    private float TiempoRestante; 
-    private bool tiempoCorriendo = false;
-    private bool jugadorAfuera = false;
+    private float timeRemaining;
+    private bool timerRunning = false;
+    private bool playerExited = false;
 
     private void Start()
     {
-        GameDataStructure.Instance.collectedCrystals.Clear();
-        int needed = GameManager.Instance.crystalsNeededInCave;
-        UIManager.Instance.UpdateCrystalCount(0, needed);
-
-        if (JsonManager.Instance.Data.config != null)
-            TiempoRestante = JsonManager.Instance.Data.config.caveTimeLimit;
-        else
-            TiempoRestante = 60f;
-
-        tiempoCorriendo = true;
-        jugadorAfuera = false;
-
-        // Activar el texto del timer explícitamente ← agrega esto
-        if (timerText != null)
-            timerText.gameObject.SetActive(true);
-
-        UpdateTimerUI();
-        Debug.Log($"[CaveTimer] Tiempo límite: {TiempoRestante}s");
-
       
+        if (JsonManager.Instance?.Data?.config != null)
+            timeRemaining = JsonManager.Instance.Data.config.caveTimeLimit;
+        else
+            timeRemaining = 60f;
 
+        timerRunning = true;
+        Debug.Log($"[CaveTimer] Tiempo límite: {timeRemaining}s");
     }
 
     private void Update()
     {
-        if (!tiempoCorriendo || jugadorAfuera) return; 
-        TiempoRestante -= Time.deltaTime;
+        if (!timerRunning || playerExited) return;
+
+        timeRemaining -= Time.deltaTime;
         UpdateTimerUI();
-        if (TiempoRestante <= 0f)
+
+        if (timeRemaining <= 0f)
             TimeUp();
     }
 
@@ -56,37 +44,36 @@ public class CaveTimerController : MonoBehaviour
     {
         if (timerText == null) return;
 
-        float t = Mathf.Max(TiempoRestante, 0f);
-        int minutos = Mathf.FloorToInt(t / 60f);
+        float t = Mathf.Max(timeRemaining, 0f);
+        int minutes = Mathf.FloorToInt(t / 60f);
         int seconds = Mathf.FloorToInt(t % 60f);
 
-        timerText.text = $"{minutos:00}:{seconds:00}";
-        timerText.color = TiempoRestante <= warningThreshold ? warningColor : normalColor;
+        timerText.text = $" {minutes:00}:{seconds:00}";
+        timerText.color = timeRemaining <= warningThreshold ? warningColor : normalColor;
     }
 
     private void TimeUp()
     {
-        tiempoCorriendo = false;
-        Debug.Log("[CaveTimer] ¡Tiempo agotado!");
-        UIManager.Instance.ShowMessage("La cueva colapsó, inténtalo de nuevo", 2f);
+        timerRunning = false;
+        Debug.Log("[CaveTimer] ¡Tiempo agotado! Reiniciando escena...");
 
+        UIManager.Instance?.ShowMessage("¡La cueva colapsó! Inténtalo de nuevo.", 2f);
+
+       
         GameDataStructure.Instance.collectedCrystals.Clear();
 
-        Invoke(nameof(RestartScene), 2f);
-
+        Invoke(nameof(RestartScene), 2f); 
     }
 
     private void RestartScene()
     {
-       SceneManager.LoadScene("CUEVA");
+        SceneManager.LoadScene("CUEVA");
     }
-     
+
+    
     public void StopTimer()
     {
-        tiempoCorriendo = false;
-        jugadorAfuera = true;
+        timerRunning = false;
+        playerExited = true;
     }
-
-   
-
 }

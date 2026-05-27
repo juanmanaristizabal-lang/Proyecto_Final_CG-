@@ -31,7 +31,7 @@ public class LabController : MonoBehaviour
 
     private IEnumerator ReiniciarEscena()
     {
-        UIManager.Instance?.ShowMessage("¡Has muerto! Reiniciando...", 2f);
+        UIManager.Instance?.ShowMessage("Has muerto Reiniciando...", 2f);
         GameDataStructure.Instance.LogEvent("Jugador muerto — reiniciando Laboratorio");
 
         yield return new WaitForSeconds(2f);

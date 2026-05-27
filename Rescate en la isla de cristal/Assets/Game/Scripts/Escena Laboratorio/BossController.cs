@@ -77,7 +77,7 @@ public class BossController : MonoBehaviour
             {
                 faseActual = 3;
                 agent.speed = velocidadAgresividad;
-                UIManager.Instance.ShowMessage("¡El jefe se ha vuelto más agresivo!", 2f);
+                UIManager.Instance.ShowMessage("El jefe se ha vuelto más agresivo", 2f);
                 Debug.Log("[Boss] Modo agresivo ");
             }
             return; 

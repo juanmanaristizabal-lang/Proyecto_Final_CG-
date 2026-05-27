@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         hasKey = true;
         GameDataStructure.Instance.LogEvent("Llave recolectada");
-        UIManager.Instance.ShowMessage("Has recolectado la llave!");
+        UIManager.Instance.ShowMessage("Has recolectado la llave");
         MisionManager.Instance.CompleteMission("Encontrar la llave");
         SaveGame();
     }
@@ -86,10 +86,9 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        GameDataStructure.Instance.LogEvent("¡VICTORIA! La nave fue reconstruida.");
+        GameDataStructure.Instance.LogEvent("VICTORIA");
         SaveGame();
-        Debug.Log("🏆 ¡El juego ha terminado!");
-        
+        SceneManager.LoadScene("Victoria");
     }
 
     public void SaveGame()
@@ -110,6 +109,13 @@ public class GameManager : MonoBehaviour
 
         JsonManager.Instance.SaveGame(data);
     }
+
+    public void ResetearJuego()
+    {
+        hasKey = false;
+        Debug.Log("[GameManager]  Estado reseteado");
+    }
+
     private void ApplySaveData(PlayerSaveData save)
     {
         if (save == null) return;

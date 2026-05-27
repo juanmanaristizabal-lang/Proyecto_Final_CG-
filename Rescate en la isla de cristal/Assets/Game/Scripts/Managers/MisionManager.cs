@@ -26,7 +26,7 @@ public class MisionManager : MonoBehaviour
             Instance = this;
           
             
-            DontDestroyOnLoad(gameObject);
+           DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -173,6 +173,18 @@ public class MisionManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+
+    public void ResetearMisiones()
+    {
+        var misiones = JsonManager.Instance?.Data?.missions;
+        if (misiones == null) return;
+
+        foreach (var m in misiones)
+            m.completed = false;
+
+        Debug.Log("[MisionManager]  Misiones reseteadas");
     }
 
 

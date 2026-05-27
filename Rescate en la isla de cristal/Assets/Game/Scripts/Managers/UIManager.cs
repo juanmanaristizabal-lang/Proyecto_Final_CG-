@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+           
         }
         else
         {
@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
             int parts = GameDataStructure.Instance.PlanePartsDataBase.Count;
             int needed = GameManager.Instance.PlanePartsNeeded;
 
-            // Si ya tiene las piezas → mostrar misión de reconstruir
+         
             if (parts >= needed)
             {
                 foreach (var m in misiones)
@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                // Si no tiene piezas → mostrar misión de buscar llave
+              
                 foreach (var m in misiones)
                 {
                     if (m.id == "encontrar_llave")
@@ -96,7 +96,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // Para CUEVA y Laboratorio busca normalmente
             foreach (var m in misiones)
             {
                 if (m.scene.Trim() == escena.Trim())
@@ -112,7 +111,7 @@ public class UIManager : MonoBehaviour
         {
             UpdateMissionText(misionAMostrar.title, misionAMostrar.description);
             ShowMessage(misionAMostrar.description, 4f);
-            Debug.Log($"[UIManager] ✅ Misión: {misionAMostrar.title}");
+            Debug.Log($"[UIManager]  Misión: {misionAMostrar.title}");
         }
         else
         {
