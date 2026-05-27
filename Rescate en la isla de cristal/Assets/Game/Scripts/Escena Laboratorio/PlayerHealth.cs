@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         if (seMurio) return;
         seMurio = true;
 
-        // Busca el LabController en la escena — igual que cueva usa CaveTimerController
+
         FindFirstObjectByType<LabController>()?.JugadorMurio();
     }
 
