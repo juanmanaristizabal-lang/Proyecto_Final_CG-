@@ -9,52 +9,41 @@ public class ItemSpawner : MonoBehaviour
     [Header("Punto donde aparece la llave")]
     public Transform keyPoint;
 
-    private void Start()
+    private void Awake()
     {
         SpawnKey();
     }
 
     private void SpawnKey()
     {
-        var gameData = JsonManager.Instance?.Data;
+        // Verificar en el save si ya tiene la llave
+        PlayerSaveData save = JsonManager.Instance.LoadSave();
+        bool yaTimeLlave = save != null && save.hasKey;
 
-        if (gameData == null || gameData.items == null)
+        if (yaTimeLlave)
         {
-            Debug.LogWarning("[ItemSpawner] No se encontraron ítems.");
+            Debug.Log("[ItemSpawner] Save indica que ya tiene la llave.");
             return;
         }
+
+        var gameData = JsonManager.Instance?.Data;
+        if (gameData == null || gameData.items == null) return;
 
         string currentScene = SceneManager.GetActiveScene().name;
 
         foreach (ItemData item in gameData.items)
         {
-            // Solo buscar llaves de esta escena
-            if (item.scene != currentScene)
-                continue;
+            if (item.scene != currentScene) continue;
+            if (item.type != "key") continue;
+            if (keyPrefab == null || keyPoint == null) return;
 
-            if (item.type != "key")
-                continue;
-
-            if (keyPrefab == null || keyPoint == null)
-            {
-                Debug.LogWarning("[ItemSpawner] Falta asignar prefab o punto de spawn.");
-                return;
-            }
-
-            GameObject key =
-                Instantiate(keyPrefab,
-                keyPoint.position,
-                Quaternion.identity);
-
+            GameObject key = Instantiate(keyPrefab, keyPoint.position, Quaternion.identity);
             key.name = item.id;
 
-            var keyCollectible =
-                key.GetComponent<KeyCollectable>();
+            var kc = key.GetComponent<KeyCollectable>();
+            if (kc != null) kc.keyId = item.id;
 
-            if (keyCollectible != null)
-                keyCollectible.keyId = item.id;
-
-            Debug.Log($"[ItemSpawner] Llave creada: {item.id}");
+            Debug.Log($"[ItemSpawner] ✅ Llave spawneada: {item.id}");
         }
     }
 }

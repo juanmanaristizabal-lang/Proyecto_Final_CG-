@@ -50,6 +50,7 @@ public class VictoryManager : MonoBehaviour
 
 
         JsonManager.Instance.DeleteSave();
+        JsonManager.Instance.LoadGameData();
         GameDataStructure.Instance.collectedCrystals.Clear();
         GameDataStructure.Instance.PlanePartsDataBase.Clear();
         GameDataStructure.Instance.repairQueue.Clear();

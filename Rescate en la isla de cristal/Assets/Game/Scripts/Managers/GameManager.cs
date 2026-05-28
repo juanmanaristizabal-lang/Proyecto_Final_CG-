@@ -63,7 +63,8 @@ public class GameManager : MonoBehaviour
 
         GameDataStructure.Instance.collectedCrystals.Clear();
         GameDataStructure.Instance.LogEvent("Entrando a la Cueva");
-        SaveGame();
+        
+        SaveGameWithScene("CUEVA");
         SceneManager.LoadScene(SCENE_CUEVA);
     }
 
@@ -71,16 +72,17 @@ public class GameManager : MonoBehaviour
     {
         GameDataStructure.Instance.PlanePartsDataBase.Clear();
         GameDataStructure.Instance.repairQueue.Clear();
-
+        SaveGameWithScene("Laboratorio");
         GameDataStructure.Instance.LogEvent("Entrando al Laboratorio");
-        SaveGame();
+        
         SceneManager.LoadScene("Laboratorio");
     }
 
     public void GoToIsla()
     {
         GameDataStructure.Instance.LogEvent("Regresando a la Isla");
-        SaveGame();
+       
+        SaveGameWithScene("ISLA");
         SceneManager.LoadScene(SCENE_ISLA);
     }
 
@@ -115,6 +117,20 @@ public class GameManager : MonoBehaviour
         hasKey = false;
         Debug.Log("[GameManager]  Estado reseteado");
     }
+
+    public void SaveGameWithScene(string sceneName)
+    {
+        var data = new PlayerSaveData
+        {
+            currentScene = sceneName,  // ← guarda la escena destino
+            hasKey = this.hasKey,
+            collectedCrystals = new List<string>(GameDataStructure.Instance.collectedCrystals),
+            collectedShipParts = new List<string>(GameDataStructure.Instance.PlanePartsDataBase.Keys),
+            score = GameDataStructure.Instance.collectedCrystals.Count * 10
+        };
+        JsonManager.Instance.SaveGame(data);
+    }
+
 
     private void ApplySaveData(PlayerSaveData save)
     {

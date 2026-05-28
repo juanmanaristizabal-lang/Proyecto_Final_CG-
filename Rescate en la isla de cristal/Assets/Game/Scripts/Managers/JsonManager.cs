@@ -38,7 +38,7 @@ public class JsonManager : MonoBehaviour
         LoadGameData();
     }
 
-    private void LoadGameData()
+    public void LoadGameData()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "game_data.json");
 

@@ -17,6 +17,6 @@ public class KeyCollectable : MonoBehaviour
         GameManager.Instance.CollectKey();
         if (collectEffect != null)
             Instantiate(collectEffect, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
