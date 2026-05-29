@@ -42,11 +42,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"[GameManager] Config cargada → Cristales: {crystalsNeededInCave}, Piezas: {PlanePartsNeeded}");
         }
 
-        // Cargar progreso si existe
-       // if (JsonManager.Instance.HasSaveFile())
-        //{
-          //  ApplySaveData(JsonManager.Instance.LoadSave());
-       // }
+       
     }
 
     public void CollectKey()

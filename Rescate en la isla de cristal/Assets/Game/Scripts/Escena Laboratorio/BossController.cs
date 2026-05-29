@@ -37,7 +37,7 @@ public class BossController : MonoBehaviour
     private int faseActual = 1;
 
     
-    private const float UMBRAL_MOVIMIENTO = 0.1f;
+  
 
     private void Start()
     {
