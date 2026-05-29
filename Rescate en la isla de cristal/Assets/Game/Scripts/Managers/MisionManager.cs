@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,6 @@ public class MisionManager : MonoBehaviour
     private List<MissionData> _missions = new List<MissionData>();
 
     [Header("Piezas de la nave")]
-    private int currentShipParts = 0;
     private int neededShipParts = 0;
 
     private void Awake()
@@ -24,9 +24,8 @@ public class MisionManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-          
-            
-           DontDestroyOnLoad(gameObject);
+
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -86,7 +85,7 @@ public class MisionManager : MonoBehaviour
                 if (m.id == "reparar_nave")
                 {
                     UIManager.Instance.UpdatePlaneParts(
-                        currentShipParts,
+                        GameDataStructure.Instance.PlanePartsDataBase.Count,
                         neededShipParts
                     );
                 }
@@ -121,7 +120,8 @@ public class MisionManager : MonoBehaviour
 
     public void CollectShipPart()
     {
-        currentShipParts++;
+        int currentShipParts =
+            GameDataStructure.Instance.PlanePartsDataBase.Count;
 
         UIManager.Instance.UpdatePlaneParts(
             currentShipParts,
@@ -148,8 +148,8 @@ public class MisionManager : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
-        
         var missions = JsonManager.Instance?.Data?.missions;
+
         if (missions == null)
         {
             Debug.LogWarning("[MisionManager] No hay misiones en el JSON.");
@@ -160,32 +160,36 @@ public class MisionManager : MonoBehaviour
         {
             if (mission.scene == currentScene && !mission.completed)
             {
-                
                 UIManager.Instance?.UpdateMissionText(
                     mission.title,
-                    mission.description);
+                    mission.description
+                );
 
-                
                 UIManager.Instance?.ShowMessage(
-                    mission.description, 4f);
+                    mission.description,
+                    4f
+                );
 
-                Debug.Log($"[MisionManager] Misión leída del JSON: {mission.title}");
+                Debug.Log(
+                    $"[MisionManager] Misión leída del JSON: {mission.title}"
+                );
+
                 return;
             }
         }
     }
 
-
     public void ResetearMisiones()
     {
         var misiones = JsonManager.Instance?.Data?.missions;
-        if (misiones == null) return;
+
+        if (misiones == null)
+            return;
 
         foreach (var m in misiones)
             m.completed = false;
 
-        Debug.Log("[MisionManager]  Misiones reseteadas");
+        Debug.Log("[MisionManager] Misiones reseteadas");
     }
-
-
 }
+

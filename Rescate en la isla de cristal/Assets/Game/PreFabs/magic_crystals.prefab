@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc45ff604a229f8428679771dda8be44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemEfecto
-  collectParticles: {fileID: 5000050355428482913, guid: 77ada76c38152bc4381ae2255aab03b3,
+  collectParticles: {fileID: 8106092206320005538, guid: 77ada76c38152bc4381ae2255aab03b3,
     type: 3}
   collectSound: {fileID: 0}
   volume: 1

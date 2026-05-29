@@ -71,7 +71,7 @@
     {
       "id": "cristal_05",
       "type": "crystal",
-      "scene": "CUEVA"
+      "scene": "CUEVA*"
     },
 
     {

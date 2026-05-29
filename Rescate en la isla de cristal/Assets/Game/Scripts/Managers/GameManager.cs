@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private const string SCENE_ISLA = "ISLA";   
     private const string SCENE_CUEVA = "CUEVA";
-    private const string SCENE_LABORATORIO = "LABORATORIO";
+    
 
     private void Awake()
     {
@@ -133,12 +133,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void ApplySaveData(PlayerSaveData save)
-    {
-        if (save == null) return;
-        hasKey = save.hasKey;
-        GameDataStructure.Instance.LoadFroamSave(save);
-        Debug.Log($"[GameManager] Progreso cargado → Llave: {hasKey}");
-    }
+    
 
 }

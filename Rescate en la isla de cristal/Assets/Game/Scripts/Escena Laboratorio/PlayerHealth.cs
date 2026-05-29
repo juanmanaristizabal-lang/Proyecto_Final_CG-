@@ -31,10 +31,21 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         if (seMurio) return;
+
         seMurio = true;
 
-        GameDataStructure.Instance.LogEvent("Jugador muerto en Laboratorio");
-        FindFirstObjectByType<LabController>()?.JugadorMurio(); // ← sin delay
+        GameDataStructure.Instance.LogEvent("Jugador muerto");
+
+        string escenaActual = SceneManager.GetActiveScene().name;
+
+        if (escenaActual.Equals("Laboratorio"))
+        {
+            FindFirstObjectByType<LabController>()?.JugadorMurio();
+        }
+        else if (escenaActual.Equals("ISLA"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
 

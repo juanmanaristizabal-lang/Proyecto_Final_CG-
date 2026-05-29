@@ -43,6 +43,8 @@ public class MainMenuController : MonoBehaviour
     private void OnEscenaCargada(Scene scene, LoadSceneMode mode)
     {
 
+        SceneManager.sceneLoaded -= OnEscenaCargada;
+
         if (scene.name != "CUEVA")
         {
             GameDataStructure.Instance.LoadFroamSave(saveToLoad);

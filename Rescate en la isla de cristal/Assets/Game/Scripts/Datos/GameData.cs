@@ -64,7 +64,7 @@ public class GameData
 {
     public GameConfig config;
     public List<MissionData> missions;
-    public List<DialogueData> dialogues;
+  
     public List<EnemyData> enemies;
     public List<ItemData> items;
 }

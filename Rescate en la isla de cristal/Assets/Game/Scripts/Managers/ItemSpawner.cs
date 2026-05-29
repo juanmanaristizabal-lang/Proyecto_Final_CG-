@@ -9,41 +9,64 @@ public class ItemSpawner : MonoBehaviour
     [Header("Punto donde aparece la llave")]
     public Transform keyPoint;
 
+    [Header("Prefab cristal")]
+    public GameObject crystalPrefab;
+
+    [Header("Puntos cristales")]
+    public Transform[] crystalPoints;
+
     private void Awake()
     {
         SpawnKey();
+        
     }
 
     private void SpawnKey()
     {
         // Verificar en el save si ya tiene la llave
         PlayerSaveData save = JsonManager.Instance.LoadSave();
-        bool yaTimeLlave = save != null && save.hasKey;
+        bool yaTieneLlave = save != null && save.hasKey;
 
-        if (yaTimeLlave)
+        if (yaTieneLlave)
         {
             Debug.Log("[ItemSpawner] Save indica que ya tiene la llave.");
             return;
         }
 
         var gameData = JsonManager.Instance?.Data;
-        if (gameData == null || gameData.items == null) return;
+
+        if (gameData == null || gameData.items == null)
+            return;
 
         string currentScene = SceneManager.GetActiveScene().name;
 
         foreach (ItemData item in gameData.items)
         {
-            if (item.scene != currentScene) continue;
-            if (item.type != "key") continue;
-            if (keyPrefab == null || keyPoint == null) return;
+            if (item.scene != currentScene)
+                continue;
 
-            GameObject key = Instantiate(keyPrefab, keyPoint.position, Quaternion.identity);
+            if (item.type != "key")
+                continue;
+
+            if (keyPrefab == null || keyPoint == null)
+                return;
+
+            GameObject key = Instantiate(
+                keyPrefab,
+                keyPoint.position,
+                Quaternion.identity
+            );
+
             key.name = item.id;
 
             var kc = key.GetComponent<KeyCollectable>();
-            if (kc != null) kc.keyId = item.id;
 
-            Debug.Log($"[ItemSpawner] ✅ Llave spawneada: {item.id}");
+            if (kc != null)
+                kc.keyId = item.id;
+
+            Debug.Log($"[ItemSpawner] Llave spawneada: {item.id}");
         }
     }
+
+    
 }

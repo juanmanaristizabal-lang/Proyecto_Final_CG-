@@ -35,11 +35,14 @@ public class PlanePart : MonoBehaviour
 
             MisionManager.Instance.CollectShipPart();
 
-            GameManager.Instance.SaveGame();
+            
 
             gameObject.SetActive(false);
         }
     }
+
+   
+
 
     private void Update()
     {
