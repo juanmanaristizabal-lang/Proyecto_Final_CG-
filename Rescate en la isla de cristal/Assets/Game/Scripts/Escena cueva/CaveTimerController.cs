@@ -54,21 +54,12 @@ public class CaveTimerController : MonoBehaviour
 
     private void TimeUp()
     {
-        timerRunning = false;
-        Debug.Log("[CaveTimer] ¡Tiempo agotado! Reiniciando escena...");
-
-        UIManager.Instance?.ShowMessage("¡La cueva colapsó! Inténtalo de nuevo.", 2f);
-
-       
+        timerRunning= false;
         GameDataStructure.Instance.collectedCrystals.Clear();
-
-        Invoke(nameof(RestartScene), 2f); 
-    }
-
-    private void RestartScene()
-    {
         SceneManager.LoadScene("CUEVA");
     }
+
+    
 
     
     public void StopTimer()

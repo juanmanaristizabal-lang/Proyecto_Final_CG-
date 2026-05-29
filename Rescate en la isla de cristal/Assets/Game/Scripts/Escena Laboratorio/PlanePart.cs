@@ -18,7 +18,7 @@ public class PlanePart : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             collected = true;
-
+            GetComponent<ItemEfecto>()?.Play();
             ItemData newPart = new ItemData
             {
                 id = partID,

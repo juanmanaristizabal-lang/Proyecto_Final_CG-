@@ -20,26 +20,16 @@ public class LabController : MonoBehaviour
         Debug.Log("[LabController] Laboratorio iniciado.");
     }
 
-    
+
     public void JugadorMurio()
     {
         if (reiniciando) return;
         reiniciando = true;
 
-        StartCoroutine(ReiniciarEscena());
-    }
-
-    private IEnumerator ReiniciarEscena()
-    {
-        UIManager.Instance?.ShowMessage("Has muerto Reiniciando...", 2f);
-        GameDataStructure.Instance.LogEvent("Jugador muerto — reiniciando Laboratorio");
-
-        yield return new WaitForSeconds(2f);
-
-       
         GameDataStructure.Instance.PlanePartsDataBase.Clear();
         GameDataStructure.Instance.repairQueue.Clear();
-
-        SceneManager.LoadScene("Laboratorio");
+        SceneManager.LoadScene("Laboratorio"); 
     }
+
+    
 }

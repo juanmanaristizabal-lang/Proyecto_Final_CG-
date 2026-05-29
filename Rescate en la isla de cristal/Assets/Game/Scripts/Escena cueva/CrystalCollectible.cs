@@ -18,15 +18,20 @@ public class CrystalCollectible : MonoBehaviour
 
     private void Collect()
     {
-        collecteeed = true; 
+        if (GameDataStructure.Instance.collectedCrystals.Contains(crystalID))
+            return;
 
+
+        GetComponent<ItemEfecto>()?.Play();
         GameDataStructure.Instance.AddCrystal(crystalID);
 
         int current = GameDataStructure.Instance.collectedCrystals.Count;
         int needed = GameManager.Instance.crystalsNeededInCave;
-        UIManager.Instance.UpdateCrystalCount(current, needed);
-        UIManager.Instance.ShowMessage($"Has recolectado un cristal! ({current}/{needed})");
 
+        UIManager.Instance.UpdateCrystalCount(current, needed);
+        UIManager.Instance.ShowMessage($"Cristal ({current}/{needed})");
+
+        gameObject.SetActive(false);
     }
 
 }

@@ -39,42 +39,6 @@
     }
   ],
 
-  "dialogues": [
-    {
-      "id": "intro_isla",
-      "scene": "ISLA",
-      "lines": [
-        "¿Dónde estoy...?",
-        "Mi nave cayó en esta isla. Debo encontrar la forma de escapar.",
-        "Escucho algo... parece venir de las cuevas al norte."
-      ]
-    },
-    {
-      "id": "cerca_cueva",
-      "scene": "ISLA",
-      "lines": [
-        "Esta debe ser la entrada a la cueva...",
-        "Necesito una llave para abrirla."
-      ]
-    },
-    {
-      "id": "intro_cueva",
-      "scene": "CUEVA",
-      "lines": [
-        "Esta cueva está llena de cristales de energía.",
-        "¡Tengo que recogerlos rápido! Las paredes están temblando..."
-      ]
-    },
-    {
-      "id": "intro_laboratorio",
-      "scene": "Laboratorio",
-      "lines": [
-        "Un laboratorio abandonado...",
-        "Aquí deben estar las piezas de mi nave."
-      ]
-    }
-  ],
-
   "enemies": [],
 
   "items": [
@@ -133,4 +97,3 @@
     }
   ]
 }
-

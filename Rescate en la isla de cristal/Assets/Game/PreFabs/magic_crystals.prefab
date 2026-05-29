@@ -90,6 +90,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2253853462157179002}
+    - targetCorrespondingSourceObject: {fileID: -6689036041284674117, guid: d88178aaa8b87c44b8efeae1b9cd3121,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6678546577500485962}
   m_SourcePrefab: {fileID: -5645937942226959685, guid: d88178aaa8b87c44b8efeae1b9cd3121,
     type: 3}
 --- !u!1 &6365418688675999198 stripped
@@ -132,3 +136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrystalCollectible
   crystalID: cristal_01
+--- !u!114 &6678546577500485962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365418688675999198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc45ff604a229f8428679771dda8be44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemEfecto
+  collectParticles: {fileID: 5000050355428482913, guid: 77ada76c38152bc4381ae2255aab03b3,
+    type: 3}
+  collectSound: {fileID: 0}
+  volume: 1

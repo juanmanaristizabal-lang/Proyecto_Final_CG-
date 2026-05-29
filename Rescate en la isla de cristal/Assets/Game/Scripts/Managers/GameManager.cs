@@ -60,10 +60,11 @@ public class GameManager : MonoBehaviour
 
     public void GoToCueva()
     {
-
-        GameDataStructure.Instance.collectedCrystals.Clear();
         GameDataStructure.Instance.LogEvent("Entrando a la Cueva");
+
         
+        GameDataStructure.Instance.collectedCrystals.Clear();
+
         SaveGameWithScene("CUEVA");
         SceneManager.LoadScene(SCENE_CUEVA);
     }

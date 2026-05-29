@@ -33,8 +33,8 @@ public class PlayerHealth : MonoBehaviour
         if (seMurio) return;
         seMurio = true;
 
-
-        FindFirstObjectByType<LabController>()?.JugadorMurio();
+        GameDataStructure.Instance.LogEvent("Jugador muerto en Laboratorio");
+        FindFirstObjectByType<LabController>()?.JugadorMurio(); // ← sin delay
     }
 
 

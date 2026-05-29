@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,16 +42,15 @@ public class MainMenuController : MonoBehaviour
 
     private void OnEscenaCargada(Scene scene, LoadSceneMode mode)
     {
-      
-        SceneManager.sceneLoaded -= OnEscenaCargada;
 
-        if (saveToLoad == null) return;
-
-        GameManager.Instance.hasKey = saveToLoad.hasKey;
-        GameDataStructure.Instance.LoadFroamSave(saveToLoad);
-
-        Debug.Log($"[Menu]  Partida cargada → hasKey: {saveToLoad.hasKey}");
-        saveToLoad = null;
+        if (scene.name != "CUEVA")
+        {
+            GameDataStructure.Instance.LoadFroamSave(saveToLoad);
+        }
+        else
+        {
+            GameDataStructure.Instance.collectedCrystals = new List<string>();
+        }
     }
 
 
