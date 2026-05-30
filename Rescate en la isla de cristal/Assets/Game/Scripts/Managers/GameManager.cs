@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         var data = new PlayerSaveData
         {
-            currentScene = sceneName,  // ← guarda la escena destino
+            currentScene = sceneName,  
             hasKey = this.hasKey,
             collectedCrystals = new List<string>(GameDataStructure.Instance.collectedCrystals),
             collectedShipParts = new List<string>(GameDataStructure.Instance.PlanePartsDataBase.Keys),

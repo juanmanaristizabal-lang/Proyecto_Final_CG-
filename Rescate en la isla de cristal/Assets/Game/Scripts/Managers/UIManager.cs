@@ -1,8 +1,8 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Rendering;
+
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     [Header("Contador piezas nave")]
     public TextMeshProUGUI planePartsText;
 
-    [Header("Contador piezas nave")]
+    [Header("Contador piezas nave")]    
     private float messageTimer;
 
     private void Awake()

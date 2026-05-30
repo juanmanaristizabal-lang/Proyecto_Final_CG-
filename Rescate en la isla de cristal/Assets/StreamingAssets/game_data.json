@@ -26,7 +26,7 @@
     {
       "id": "reparar_nave",
       "title": "Recoge las Piezas",
-      "description": "Encuentra las piezas de la nave en el Laboratorio.",
+      "description": "Busca las piezas de la nave en el Laboratorio.",
       "scene": "Laboratorio",
       "completed": false
     },
@@ -71,8 +71,15 @@
     {
       "id": "cristal_05",
       "type": "crystal",
-      "scene": "CUEVA*"
+      "scene": "CUEVA"
     },
+
+	{
+      "id": "cristal_06",
+      "type": "crystal",
+      "scene": "CUEVA"
+    },
+
 
     {
       "id": "pieza_motor",
